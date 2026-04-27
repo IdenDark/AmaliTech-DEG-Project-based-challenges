@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "id": "device-23",
-  "timeout": 5,
+  "timeout": 6,
   "alert_email": "admin@critmon.com"
 }
 
@@ -15,4 +15,4 @@ POST http://localhost:8080/monitors/device-23/heartbeat
 POST http://localhost:8080/monitors/device-23/heartbeat
 
 ### epiration
-POST http://localhost:8080/monitors/device-23/heartbeat
+GET http://localhost:8080/monitors/device-23
