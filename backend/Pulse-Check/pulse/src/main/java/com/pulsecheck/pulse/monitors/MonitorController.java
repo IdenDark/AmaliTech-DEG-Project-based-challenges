@@ -41,5 +41,17 @@ public class MonitorController {
 
 		return ResponseEntity.ok(new MessageResponse("Heartbeat received. Countdown reset."));
 	}
+
+
+	/////endpoint for snoozing...///////
+	@PostMapping("/monitors/{id}/snooze")
+	public ResponseEntity<MessageResponse> snooze(@PathVariable String id) {
+		var result = monitorService.snoozeMonitor(id);
+		if (result.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(new MessageResponse("Monitor not found."));
+		}
+		return ResponseEntity.ok(new MessageResponse("Monitor snoozed. Timer stopped."));
+	}
 }
 

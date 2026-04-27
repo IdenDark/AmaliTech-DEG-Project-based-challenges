@@ -13,6 +13,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import javax.management.RuntimeErrorException;
+
 @Service
 public class MonitorService {
 	private final Map<String, Monitor> monitors = new ConcurrentHashMap<>();
@@ -32,6 +34,7 @@ public class MonitorService {
 		var monitor = new Monitor(id, timeoutSeconds, alertEmail);
 		scheduleExpiry(monitor);
 		monitors.put(id, monitor);
+		System.out.println("Created:201  " + id+" Monitor registered successfully");
 		return monitor;
 	}
 
@@ -49,9 +52,14 @@ public class MonitorService {
 			if (monitor.getStatus() == MonitorStatus.DOWN) {
 				return Optional.of(monitor);
 			}
+			// If monitor is snoozed, un-snooze it on heartbeat
+			if (monitor.getStatus() == MonitorStatus.SNOOZED) {
+				monitor.setStatus(MonitorStatus.UP);
+			}
 			monitor.setLastHeartbeatAt(Instant.now());
 			cancelExpiry(monitor.getExpiryTask());
 			scheduleExpiry(monitor);
+			System.out.println("OK:200 " + id + " Monitor heartbeat received");
 			return Optional.of(monitor);
 		}
 	}
@@ -85,6 +93,28 @@ public class MonitorService {
 	@PreDestroy
 	void shutdown() {
 		scheduler.shutdownNow();
+	}
+///////snooze function..///.//
+	public Optional<Monitor> snoozeMonitor(String id) {
+		if (id == null || id.isBlank()) {
+			return Optional.empty();
+		}
+
+		var monitor = monitors.get(id);
+		if (monitor == null) {
+			return Optional.empty();
+		}
+
+		synchronized (monitor) {
+			if (monitor.getStatus() == MonitorStatus.DOWN) {
+				return Optional.of(monitor);
+			}
+			// Cancel the expiry task to stop the timer
+			cancelExpiry(monitor.getExpiryTask());
+			monitor.setStatus(MonitorStatus.SNOOZED);
+			System.out.println("OK:200 "+ id+" Monitor snoozed" );
+			return Optional.of(monitor);
+		}
 	}
 }
 
