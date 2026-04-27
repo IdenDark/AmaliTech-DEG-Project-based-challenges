@@ -53,5 +53,19 @@ public class MonitorController {
 		}
 		return ResponseEntity.ok(new MessageResponse("Monitor snoozed. Timer stopped."));
 	}
+
+	/// endpont for getting monitor data.
+
+	@GetMapping("/monitors/{id}")
+	public ResponseEntity<?> getMonitor(@PathVariable String id) {
+		try {
+			var monitor = monitorService.getMonitor(id);
+			return ResponseEntity.ok(monitor);
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(new MessageResponse(e.getMessage()));
+		}
+	}
+
 }
 

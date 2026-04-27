@@ -116,5 +116,20 @@ public class MonitorService {
 			return Optional.of(monitor);
 		}
 	}
+
+////// getting monitor info in service.
+
+
+public Monitor getMonitor(String id){
+	Monitor monitor = monitors.get(id);
+
+	if (monitor == null) {
+		System.out.println("Monitor not found");
+		throw new RuntimeException("Monitor not found");
+		
+	}
+	return monitor;
+}
+
 }
 
