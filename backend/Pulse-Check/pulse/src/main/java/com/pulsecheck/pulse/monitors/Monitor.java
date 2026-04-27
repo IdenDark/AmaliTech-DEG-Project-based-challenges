@@ -1,4 +1,4 @@
-package main.java.com.pulsecheck.pulse.monitors;
+package com.pulsecheck.pulse.monitors;
 
 import java.time.Instant;
 import java.util.Objects;

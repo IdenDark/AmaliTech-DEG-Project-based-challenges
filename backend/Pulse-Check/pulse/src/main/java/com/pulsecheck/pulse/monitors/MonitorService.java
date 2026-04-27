@@ -1,4 +1,4 @@
-package main.java.com.pulsecheck.pulse.monitors;
+package com.pulsecheck.pulse.monitors;
 
 import org.springframework.stereotype.Service;
 

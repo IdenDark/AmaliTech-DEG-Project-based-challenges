@@ -1,14 +1,14 @@
-package main.java.com.pulsecheck.pulse.monitors;
+package com.pulsecheck.pulse.monitors;
 
-import main.java.com.pulse.bonh.monitors.dto.MessageResponse;
-import main.java.com.pulse.bonh.monitors.dto.RegisterMonitorRequest;
-import main.java.org.springframework.http.HttpStatus;
-import main.java.org.springframework.http.ResponseEntity;
-import main.java.org.springframework.web.bind.annotation.GetMapping;
-import main.java.org.springframework.web.bind.annotation.PathVariable;
-import main.java.org.springframework.web.bind.annotation.PostMapping;
-import main.java.org.springframework.web.bind.annotation.RequestBody;
-import main.java.org.springframework.web.bind.annotation.RestController;
+import com.pulsecheck.pulse.monitors.dto.MessageResponse;
+import com.pulsecheck.pulse.monitors.dto.RegisterMonitorRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MonitorController {
