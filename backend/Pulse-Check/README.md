@@ -10,6 +10,7 @@ The system uses a sequence-based architecture where devices register, send heart
 
 ### Sequence Diagram
 
+<img width="6187" height="7708" alt="seq" src="https://github.com/user-attachments/assets/5d3d86f1-752b-4b45-8db1-8712c41b58ef" />
 
 
 #### Setup Instructions
@@ -20,6 +21,7 @@ Gradle (or use Gradle Wrapper)
 
 # 1. Clone the repository
 git clone https://github.com/IdenDark/AmaliTech-DEG-Project-based-challenges.git
+
 cd backend\Pulse-Check\pulse
 
 # 2. Build the project
